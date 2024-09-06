@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<title>Inicio Sesión</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="icon" href="../../img/logo1.png" type="image/x-icon">
+
+
+
+
+	<style>
+		body {
+
+			height: 100vh;
+			background-image: url('../img/fondo.jpg');
+			background-size:cover ;
+
+		}
+
+		.title {
+			text-align: center;
+		}
+
+
+
+		.login {
+			color: #000;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			display: block;
+			font-weight: bold;
+			font-size: x-large;
+		}
+
+		.card {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 350px;
+			width: 300px;
+			flex-direction: column;
+			gap: 35px;
+			background: rgb(192, 192, 192);
+			box-shadow: 10px 10px 15px #c8c8c8,
+				-10px -10px 15px #fefefe;
+			border-radius: 8px;
+			margin-top: 5%;
+		}
+
+		.inputBox {
+			position: relative;
+			width: 250px;
+		}
+
+		.inputBox input {
+			width: 100%;
+			padding: 10px;
+			outline: none;
+			border: none;
+			color: #000;
+			font-size: 1em;
+			background: transparent;
+			border-left: 2px solid #000;
+			border-bottom: 2px solid #000;
+			transition: 0.1s;
+			border-bottom-left-radius: 8px;
+		}
+
+		.inputBox span {
+			margin-top: 5px;
+			position: absolute;
+			left: 0;
+			transform: translateY(-4px);
+			margin-left: 10px;
+			padding: 10px;
+			pointer-events: none;
+			font-size: 12px;
+			color: #000;
+			text-transform: uppercase;
+			transition: 0.5s;
+			letter-spacing: 3px;
+			border-radius: 8px;
+		}
+
+		.inputBox input:valid~span,
+		.inputBox input:focus~span {
+			transform: translateX(113px) translateY(-15px);
+			font-size: 0.8em;
+			padding: 5px 10px;
+			background: #000;
+			letter-spacing: 0.2em;
+			color: #fff;
+			border: 2px;
+		}
+
+		.inputBox input:valid,
+		.inputBox input:focus {
+			border: 2px solid #000;
+			border-radius: 8px;
+		}
+
+		.enter {
+			height: 45px;
+			width: 100px;
+			border-radius: 5px;
+			border: 2px solid #000;
+			cursor: pointer;
+			background-color: black;
+			transition: 0.5s;
+			text-transform: uppercase;
+			font-size: 10px;
+			letter-spacing: 2px;
+			margin-bottom: 1em;
+			font-weight: bold;
+		}
+
+		.enter:hover {
+			background-color: rgb(0, 0, 0);
+			color: white;
+		}
+
+		/*code amor*/
+		.container {
+			height: 85vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			
+			/* Agregado para alinear verticalmente */
+		}
+
+
+
+		.login-container {
+			max-width: 400px;
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			background-color: rgb(255, 128, 0, 0.95);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+
+		.login-form {
+
+			display: none;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-12%, -30%);
+		}
+
+		.close-btn {
+			cursor: pointer;
+			margin-top: 4px;
+			margin-left: 90%;
+			background-color: white;
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+			color: rgb(0, 0, 0);
+			padding-left: 7px;
+
+		}
+
+		button {
+			position: relative;
+			padding: 10px 20px;
+			border-radius: 7px;
+			border: 1px solid rgb(255, 128, 128);
+			font-size: 14px;
+			text-transform: uppercase;
+			font-weight: 600;
+			letter-spacing: 2px;
+			background-color: rgb(255, 128, 128);
+			;
+			color: rgb(255, 255, 255);
+			font: bold;
+			overflow: hidden;
+			box-shadow: 0 0 0 0 transparent;
+			-webkit-transition: all 0.2s ease-in;
+			-moz-transition: all 0.2s ease-in;
+			transition: all 0.2s ease-in;
+		}
+
+		button:hover {
+			background: rgb(255, 0, 0);
+			box-shadow: 0 0 30px 5px rgb(255, 0, 0);
+			-webkit-transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+		}
+
+		button:hover::before {
+			-webkit-animation: sh02 0.5s 0s linear;
+			-moz-animation: sh02 0.5s 0s linear;
+			animation: sh02 0.5s 0s linear;
+		}
+
+		button::before {
+			content: '';
+			display: block;
+			width: 0px;
+			height: 86%;
+			position: absolute;
+			top: 7%;
+			left: 0%;
+			opacity: 0;
+			background: #fff;
+			box-shadow: 0 0 50px 30px #fff;
+			-webkit-transform: skewX(-20deg);
+			-moz-transform: skewX(-20deg);
+			-ms-transform: skewX(-20deg);
+			-o-transform: skewX(-20deg);
+			transform: skewX(-20deg);
+		}
+
+		@keyframes sh02 {
+			from {
+				opacity: 0;
+				left: 0%;
+			}
+
+			50% {
+				opacity: 1;
+			}
+
+			to {
+				opacity: 0;
+				left: 100%;
+			}
+		}
+
+		button:active {
+			box-shadow: 0 0 0 0 transparent;
+			-webkit-transition: box-shadow 0.2s ease-in;
+			-moz-transition: box-shadow 0.2s ease-in;
+			transition: box-shadow 0.2s ease-in;
+		}
+
+		#empleadoBtn {
+			margin-top: 5px;
+		}
+
+		#gerenteBtn {
+			margin-top: 5px;
+		}
+
+		.img-form {
+			width: 10%;
+			margin-top:20px ;
+		}
+	</style>
+</head>
+
+<body>
+
+
+	<div class="container">
+		<img class="img-form" src="../../img/logo1.png" alt="Descripción de la imagen">
+		<form th:action="@{/logear}" method="post">
+
+			<div class="card">
+				
+				<a class="login">Ingreso</a>
+				<div class="inputBox">
+					<input type="text" required id="user" name="user">
+					<span class="user">Usuario</span>
+				</div>
+
+				<div class="inputBox">
+					<input type="password" required id="contrasena" name="contrasena">
+					<span>Contraseña</span>
+				</div>
+				<button class="enter" type="submit">Enter</button>
+
+			</div>
+		</form>
+
+	</div>
+
+
+
+
+
+
+</body>
+
+</html>

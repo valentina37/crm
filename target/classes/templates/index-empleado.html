@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Menu Gerente</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+		body {
+					height: 50vh;
+					background-image: url(../img/fondo.jpg);
+					background-size: 100%
+				}
+		
+				.title {
+					text-align: center;
+					color: aliceblue;
+				}
+		
+				.btn-container {
+					text-align: center;
+					margin-top: 20px;
+					display: flex;
+					justify-content: center;
+					gap: 10px;
+				}
+		
+				.btn-large {
+					padding: 15px 40px;
+					font-size: 1.2rem;
+					margin: 10px;
+				}
+		
+				.navbar-title {
+					position: absolute !important;
+					left: 50% !important;
+					transform: translateX(-50%);
+					color: white;
+				}
+		
+				.navbar {
+					padding: 8px 16px !important;
+					background-color: transparent;
+				}
+		
+				.Btn {
+					display: flex;
+					align-items: center;
+					justify-content: flex-start;
+					width: 60px;
+					height: 60px;
+					border: none;
+					border-radius: 50%;
+					cursor: pointer;
+					position: relative;
+					overflow: hidden;
+					transition-duration: .3s;
+					box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+					background-color: rgb(255, 65, 65);
+				}
+		
+				/* plus sign */
+				.sign {
+					width: 100%;
+					transition-duration: .3s;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+		
+				.sign svg {
+					width: 17px;
+				}
+		
+				.sign svg path {
+					fill: white;
+				}
+		
+				/* text */
+				.text {
+					position: absolute;
+					right: 0%;
+					width: 0%;
+					opacity: 0;
+					color: white;
+					font-size: 1.2em;
+					font-weight: 600;
+					transition-duration: .3s;
+				}
+		
+				/* hover effect on button width */
+				.Btn:hover {
+					width: 125px;
+					border-radius: 40px;
+					transition-duration: .3s;
+				}
+		
+				.Btn:hover .sign {
+					width: 30%;
+					transition-duration: .3s;
+					padding-left: 20px;
+				}
+		
+				/* hover effect button's text */
+				.Btn:hover .text {
+					opacity: 1;
+					width: 70%;
+					transition-duration: .3s;
+					padding-right: 10px;
+				}
+		
+				/* button click effect*/
+				.Btn:active {
+					transform: translate(2px, 2px);
+				}
+		
+				.navbar-brand {
+					margin-top: 10px;
+				}
+		
+				.main {
+					display: flex;
+					flex-direction: column;
+					gap: 0.5em;
+					align-items: center;
+					align-content: center;
+					margin-left: 37%;
+				}
+		
+				.button {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 120px;
+					height: 120px;
+					border: none;
+					cursor: pointer;
+					border-radius: 0.4em;
+					background: rgba(235, 252, 254, 0.8);
+				}
+		
+				.container1 {
+					position: relative;
+					width: 110px;
+					height: 110px;
+					background: none;
+					overflow: hidden;
+				}
+		
+				.active_line {
+					content: "";
+					position: absolute;
+					bottom: 0;
+					width: 0.9em;
+					height: 0.4em;
+					background-color: #999;
+					border: none;
+					border-radius: 1em;
+					transition: all 0.15s linear;
+				}
+		
+				.button:active .active_line,
+				.button:focus .active_line {
+					width: 2.3em;
+					background-color: rgb(41, 126, 255);
+				}
+		
+				.button:focus .container {
+					animation: wow 1s forwards;
+				}
+		
+				@keyframes wow {
+					20% {
+						scale: 0.8;
+					}
+		
+					30% {
+						scale: 1;
+						transform: translateY(0);
+					}
+		
+					50% {
+						transform: translateY(-6px);
+					}
+		
+					65% {
+						transform: translateY(4px);
+					}
+		
+					80% {
+						transform: translateY(0);
+					}
+		
+					100% {
+						scale: 1;
+					}
+				}
+		
+				.text {
+					content: "";
+					position: absolute;
+					top: -4.5em;
+					width: 7.7em;
+					height: 2.6em;
+					background-color: #666;
+					color: #fff;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border: none;
+					border-radius: 5px;
+					text-shadow: 0 0 10px rgb(0, 0, 0);
+					opacity: 0;
+					transition: all 0.25s linear;
+				}
+		
+				.button:hover .text {
+					opacity: 1;
+				}
+				.container{
+					margin-top:50px;
+				}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" th:href="@{/empleado/index}">
+            <img src="../img/logo1.png" width="100" height="100" class="d-inline-block align-top" alt="Logo">
+        </a>
+		<h1 class="navbar-title">!Bienvenido, <span th:text="${nombre}"></span>! <i class="bi bi-person-video"></i></h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn my-2 my-sm-0" type="submit" th:href="@{/}">
+                        <button class="Btn">
+                            <div class="sign">
+                                <svg viewBox="0 0 512 512">
+                                    <path
+                                        d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="text">Logout</div>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+	<div class="container">
+			<div class="title">
+				<h1>Elija la opción que desee</h1>
+			</div>
+	
+			<div class="btn-container">
+				<button class="button">
+					<a th:href="@{/empleado/lista-cliente}">
+						<div class="container1">
+							<img src="../img/client.png" width="100" height="100" class="d-inline-block align-top"
+								alt="Logo">
+						</div>
+					</a>
+					<div class="active_line"></div>
+					<span class="text">Clientes</span>
+				</button>
+	
+				<button class="button">
+					<a th:href="@{/empleado/crear-contrato}">
+						<div class="container1">
+							<img src="../img/contract.png" width="100" height="100" class="d-inline-block align-top"
+								alt="Logo">
+						</div>
+					</a>
+					<div class="active_line"></div>
+					<span class="text">Contratos</span>
+				</button>
+			</div>
+		</div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz4fnFO9gybBogGzO8AKPcB1H2brH0STe7kz9lIE4zFISpIVUWB9pxFH13"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ho+pPnhm02GLFLzr3lYJrhb7Yl1QVWg2c0C0tzn5HrFEZB3wrrTZHj8mRsyOvohC"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
